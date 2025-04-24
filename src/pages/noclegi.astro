@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import InfoBox from "../components/Info-box.astro";
+import "../styles/global.css";
+
+const pageTitle = "Noclegi";
+---
+
+<style>
+
+.centered-counter {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+  }
+
+</style>
+
+<BaseLayout>
+
+
+
+<InfoBox
+  title="Noclegi"
+  description="Nasza baza "
+/> 
+
+</BaseLayout>

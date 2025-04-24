@@ -1,0 +1,47 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import logo from "../assets/img/logo.png";
+import "../styles/global.css";
+const { pageTitle } = Astro.props;
+---
+
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="description" content="Wrona Sport – wyzwania." />
+    <title>Wrona Sport – wyzwania rowerowe</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Header />
+    <slot />
+    <Footer
+    logoSrc={logo.src}
+    whatsappNumber="48512275395"
+  />
+    <script>
+      import "../scripts/menu.js";
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Wrona Sport",
+        "url": "https://wrona-sport.pl",
+        "logo": "https://wrona-sport.pl/images/logo.png"
+      }
+    </script>
+  </body>
+</html>

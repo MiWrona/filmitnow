@@ -1,0 +1,275 @@
+/* Import czcionki */
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* Reset i podstawowe style */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  scroll-behavior: smooth;
+  background-color: #f4e9c3;
+}
+
+body {
+  margin: 0 auto;
+  width: 100%;
+  line-height: 1.5;
+  position: relative;
+
+  padding-top: env(safe-area-inset-top); /* Bezpieczny odstęp w iOS Safari */
+  background: url("https://www.transparenttextures.com/patterns/aged-paper.png");
+  background-color: #333;
+  background-color: #333;
+}
+
+p {
+  color: #f4e9c3;
+}
+button {
+  font-family: "Raleway", sans-serif;
+}
+
+/* Tryb ciemny */
+html.dark {
+  background-color: #0d0950;
+  color: #fff;
+}
+
+.dark .nav-links a {
+  color: #fff;
+}
+
+/* Typografia */
+h1 {
+  margin: 1rem 0;
+  font-size: 2.5rem;
+}
+
+/* Nawigacja */
+header {
+  padding: 1em 1em 0 1em;
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+}
+
+
+
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav a {
+  color: aquamarine;
+}
+
+.nav-links {
+  display: none;
+  position: absolute;
+  top: 5rem;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  
+}
+
+.nav-links a {
+  display: flex;
+  flex-direction: column;
+  color: #f4e9c3;
+  width: auto;
+  padding: 10px 0;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+  background-color: #e4dcdc77;
+ 
+}
+
+
+
+/* Hamburger */
+.hamburger {
+  cursor: pointer;
+  position: absolute;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.hamburger .line {
+  position: absolute;
+  left: 0;
+  width: 30px;
+  height: 3px;
+  background-color: #f4e9c3;
+  transition: all 0.4s ease;
+}
+
+.hamburger .line:nth-child(1) {
+  top: 0;
+}
+
+.hamburger .line:nth-child(2) {
+  top: 10px;
+}
+
+.hamburger .line:nth-child(3) {
+  top: 20px;
+}
+
+.hamburger.expanded .line:nth-child(1) {
+  transform: rotate(45deg);
+  top: 15px;
+}
+
+.hamburger.expanded .line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.expanded .line:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 15px;
+}
+
+.expanded {
+  display: unset;
+}
+
+/* Kontener */
+.container {
+  position: relative;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+}
+
+/* paragraph */
+
+.paragraph {
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* Logo */
+.logo-main {
+  height: 70px;
+  width: 70px;
+}
+
+.display-none {
+  display: none;
+}
+
+/* Media queries */
+@media screen and (min-width: 637px) {
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    position: static;
+    background: none;
+    margin-left: 2em;
+    width: 100%;
+  }
+
+  .backdrop-filter-blur {
+    backdrop-filter: blur(5px);
+  }
+
+  .nav-links a {
+    display: inline-block;
+    padding: 15px 20px;
+    margin-right: 10px;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .nav-secondary-col {
+    width: 100%;
+  }
+}
+
+
+@media screen and (max-width: 636px) {
+
+  .nav-secondary-col {
+    min-height: 100vh;
+    width: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 20px;
+}
+
+  .rwd-backdrop-filter-blur {
+    backdrop-filter: blur(5px);
+    transform: all 5s ease;
+  }
+  .nav-links a {
+
+    font-size: 1.2rem;
+
+  }
+}
+
+@media (max-width: 688px) and (min-width: 636px) {
+  .nav-links a {
+    padding: 15px 10px;
+  }
+}
+
+/* glitch */
+.fracture-glitch {
+  font-weight: 900;
+  text-transform: uppercase;
+  position: relative;
+  background: linear-gradient(transparent 50%, #f4e9c3 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #f4e9c3; /* fallback */
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.fracture-glitch::after {
+  content: attr(data-heading);
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(#f4e9c3 50%, transparent 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: translate(0px, -2px);
+  animation: fracture 5s infinite ease;
+  width: 100%;
+  pointer-events: none;
+}
+
+@keyframes fracture {
+  0% {
+    transform: translate(0, -2px);
+  }
+  50% {
+    transform: translate(-20px, -2px);
+  }
+  100% {
+    transform: translate(0, -2px);
+  }
+}

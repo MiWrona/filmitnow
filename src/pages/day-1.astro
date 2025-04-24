@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const pageTitle = "Dzień 1";
+import StravaPopupButton from "../components/StravaPopupButton.astro";
+const skillColor = "navy";
+---
+
+
+
+<BaseLayout pageTitle={pageTitle}>
+  <div class="container">
+    <h1>{pageTitle}</h1>
+    🚩 Etap 1 – Katowice → Hałda Ema (Ostrawa)
+    123,6 km | 716 m przewyższenia | 6:18 h
+    Z betonowej dżungli Katowic ruszasz na południe przez Żory i Rybnik. To dzień rozgrzewki, ale nie łudź się – czekają na Ciebie pagórki Śląska, ciasne leśne dukty i gładkie asfaltowe nitki. Finał? Legendarna Hałda Ema w Ostrawie – industrialna piramida z widokiem, który zapiera dech. Zachód słońca z jej szczytu to jak kropka nad "i" Twojego pierwszego dnia.
+  
+  </div>
+
+  <StravaPopupButton embedId="3339199849723845918" />
+</BaseLayout>

@@ -1,0 +1,66 @@
+---
+const {
+  headline,
+  text,
+  subheadline,
+} = Astro.props;
+---
+<style>
+  section.centered-box {
+    padding: 2rem 1.5rem;
+    color: #f4e9c3;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-wrap: break-word; /* 💡 To łamie zbyt długie wyrazy */
+    word-break: break-word;
+    text-wrap: pretty;
+    
+
+  }
+
+  .headline {
+    font-size: 2.5rem;
+    font-weight: 800;
+    padding: 5px;
+    margin: 5px;
+  }
+
+  .subheadline {
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 5px;
+    margin: 5px;
+    max-width: 100%;
+   
+  }
+
+  .text {
+    font-size: 1rem;
+    max-width: 600px;
+  }
+
+  @media (min-width: 768px) {
+    section.centered-box {
+      padding: 1rem;
+    }
+
+    .headline {
+      font-size: 4rem;
+    }
+
+    .text {
+      font-size: 1.125rem;
+    }
+  }
+</style>
+
+<section class="centered-box">
+    <h2 class=" headline fracture-glitch" data-heading={headline}>{headline}</h2>
+ 
+    <h3 class="subheadline">{subheadline}</h3>
+    <div class="text">{text}</div>
+  <slot />
+</section>

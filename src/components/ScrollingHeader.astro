@@ -1,0 +1,97 @@
+---
+const { text } = Astro.props;
+---
+
+<script>
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+    const trackWrapper = document.querySelector(
+      ".scrolling-header-scale-wrapper"
+    );
+
+    const maxScale = 1;
+    const minScale = 10 / 55.5;
+    const maxScroll = 6000;
+
+    const newScale = Math.max(
+      minScale,
+      maxScale - (scrollTop / maxScroll) * (maxScale - minScale)
+    );
+
+    trackWrapper.style.setProperty("--scroll-scale", newScale);
+  });
+</script>
+
+<div class="scrolling-header-bg-bottom">
+  <div class="scrolling-header-track">
+    <div class="scrolling-header-scale-wrapper">
+      <div class="scrolling-header-track-inner">
+        <span>{text} </span>
+        <span>LIGA.CC </span>
+        <span>{text} </span>
+        <span>SIŁA </span>
+        <span>{text} </span>
+        <span>PIWO</span>
+        <span>{text} </span>
+        <span>MOC</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @property --scroll-scale {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 1;
+  }
+
+  .scrolling-header-bg-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0.05;
+    overflow: visible;
+  }
+
+  .scrolling-header-track {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .scrolling-header-scale-wrapper {
+    transform: scale(var(--scroll-scale));
+    transform-origin: bottom left;
+    will-change: transform;
+  }
+
+  .scrolling-header-track-inner {
+    display: inline-flex;
+    animation: scrollText 60s linear infinite;
+    font-size: 30rem;
+    color: #f4e9c3;
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+    letter-spacing: 3px;
+    white-space: nowrap;
+    will-change: transform;
+  }
+
+  @media screen and (max-width: 636px) {
+    .scrolling-header-track-inner {
+      animation-duration: 60s;
+    }
+  }
+
+  @keyframes scrollText {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>

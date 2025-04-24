@@ -1,0 +1,104 @@
+---
+const {
+  buttonLabel = "ok",
+  buttonLabelAlt = "Zobacz mniej",
+  id,
+  children,
+} = Astro.props;
+---
+
+<style>
+  .toggle-container {
+    margin: 1rem 0;
+  }
+
+  .toggle-button {
+    background: #ceeb998a;
+    color: #000;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .toggle-button:hover {
+    background: #ceeb998a;
+  }
+
+  .toggle-content {
+    max-height: 0;
+    color: #f0f0f0;
+    overflow: hidden;
+    opacity: 0;
+    transform: scaleY(0.95);
+    transform-origin: top;
+    transition:
+      max-height 0.5s ease,
+      opacity 0.5s ease,
+      transform 0.5s ease;
+  }
+
+  .toggle-content.open {
+    max-height: 1000px;
+    opacity: 1;
+    transform: scaleY(1);
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.08); /* subtelne jasne tło */
+    padding: 1rem;
+    border-radius: 8px;
+  }
+</style>
+
+<div class="toggle-container">
+  <button
+    class="toggle-button"
+    onclick={`toggleContent('${id}')`}
+    id={`btn-${id}`}
+  >
+    {buttonLabel}
+  </button>
+  <div class="toggle-content" id={`content-${id}`}>
+    <slot />
+  </div>
+</div>
+
+<script is:inline>
+  function toggleContent(id) {
+    const content = document.getElementById(`content-${id}`);
+    const button = document.getElementById(`btn-${id}`);
+    const isOpen = content.classList.contains("open");
+
+    content.classList.toggle("open");
+    localStorage.setItem(`toggle-${id}`, !isOpen);
+
+    const label = button.getAttribute("data-label");
+    const altLabel = button.getAttribute("data-label-alt");
+
+    button.textContent = !isOpen ? altLabel : label;
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".toggle-button").forEach((btn) => {
+      const currentText = btn.textContent.trim();
+      btn.setAttribute("data-label", currentText);
+      btn.setAttribute(
+        "data-label-alt",
+        currentText === "O co chodzi?" ? "Ok" : "Ok"
+      );
+    });
+
+    const allToggles = document.querySelectorAll(".toggle-content");
+    allToggles.forEach((content) => {
+      const id = content.id.replace("content-", "");
+      const saved = localStorage.getItem(`toggle-${id}`);
+      const btn = document.getElementById(`btn-${id}`);
+
+      if (saved === "true") {
+        content.classList.add("open");
+        btn.textContent = btn.getAttribute("data-label-alt");
+      }
+    });
+  });
+</script>

@@ -1,0 +1,25 @@
+---
+import { Image } from "astro:assets";
+
+import Hamburger from "./Hamburger.astro";
+import Navigation from "./Navigation.astro";
+import ThemeIcon from "./ThemeIcon.astro";
+
+import Logo from "../assets/img/logo.png";
+---
+
+<header>
+  <nav>
+    <a href="/">
+      <Image
+        class="logo-main"
+        src={Logo}
+        alt="A bird sitting on a nest of eggs."
+      />
+    </a>
+    <div class="nav-secondary-col">
+      <Navigation />
+      <Hamburger />
+    </div>
+  </nav>
+</header>
