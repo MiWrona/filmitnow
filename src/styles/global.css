@@ -21,9 +21,7 @@ body {
   position: relative;
 
   padding-top: env(safe-area-inset-top); /* Bezpieczny odstęp w iOS Safari */
-  background: url("https://www.transparenttextures.com/patterns/aged-paper.png");
-  background-color: #333;
-  background-color: #333;
+  background-color: #fff6f6;
 }
 
 p {
@@ -57,8 +55,6 @@ header {
   width: 100%;
 }
 
-
-
 nav {
   width: 100%;
   display: flex;
@@ -76,7 +72,6 @@ nav a {
   right: 0;
   margin: 0;
   text-align: center;
-  
 }
 
 .nav-links a {
@@ -95,10 +90,7 @@ nav a {
 .nav-links a:hover,
 .nav-links a:focus {
   background-color: #e4dcdc77;
- 
 }
-
-
 
 /* Hamburger */
 .hamburger {
@@ -205,9 +197,7 @@ nav a {
   }
 }
 
-
 @media screen and (max-width: 636px) {
-
   .nav-secondary-col {
     min-height: 100vh;
     width: 50px;
@@ -215,16 +205,14 @@ nav a {
     top: 0;
     right: 0;
     padding-top: 20px;
-}
+  }
 
   .rwd-backdrop-filter-blur {
     backdrop-filter: blur(5px);
     transform: all 5s ease;
   }
   .nav-links a {
-
     font-size: 1.2rem;
-
   }
 }
 

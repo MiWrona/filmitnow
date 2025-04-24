@@ -1,15 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import HeroVideo from "../components/HeroVideo.astro";
+import HeroVideo from "../components/Hero.astro";
 import Toggle from "../components/Toggle.astro";
-import SmallScrollingHeader from "../components/SmallScrollingHeader.astro";
 import InfoBox from "../components/Info-box.astro";
-import ImageSrc from "../assets/img/alpe-crew2.jpg";
-import CrewPhoto from "../assets/img/alpe6.jpg";
+
 import CenteredInfoBox from "../components/CenteredInfoBox.astro";
-import CrewPhoto2Web from "../assets/img/kawa-min.jpg";
-import CrewPhoto2 from "../assets/img/kawa-min.webp";
-import Counter from "../components/Counter.astro";
+
 import "../styles/global.css";
 
 const pageTitle = "I'm in";
@@ -33,10 +29,6 @@ const pageTitle = "I'm in";
 </style>
 
 <BaseLayout>
-  <SmallScrollingHeader
-    text="Ktoś powie, że to mało, ktoś inny, że to dużo. My mówimy, że to w sam raz."
-  />
-
   <HeroVideo videoSrc="/video/jazda.MP4" title="" subtitle="">
     <div class="centered-counter">
       <Toggle
@@ -58,12 +50,10 @@ const pageTitle = "I'm in";
       </Toggle>
     </div>
   </HeroVideo>
-  <Counter />
+
   <InfoBox
     ImageRight={true}
     headline="KOTLINA"
-    ImageSrc ={ImageSrc.src}
-    ImageSecondSrc={ImageSrc.src}
     text={`Wycieczka prowadzona jest w formule współpracy i kooperacji, nikogo nie dropujemy i pilnujemy żeby tyły za bardzo się nie rozjeżdzały.`}
   >
     <p class="paragraph">
@@ -73,49 +63,51 @@ const pageTitle = "I'm in";
     </p>
     <p class="paragraph">
       Ta wyczieczka to przerwa od codzienności. Wszystko co potrzebne masz ze
-      sobą na rowerze - problemów i zmartwień nie pakujemy. To czas dla
-      siebie.
+      sobą na rowerze - problemów i zmartwień nie pakujemy. To czas dla siebie.
     </p>
   </InfoBox>
   <CenteredInfoBox
-  headline="START/TRASA/META"
-  subheadline="Katowice/Ostrawa/ZloteHory/Międzylesie/LądekZdrój/KudowaZdrój/České Petrovice/Kłodzko"
-  text="08.02.2025/15.06.2025"
-  HeadlineBelow={false}
-/>
+    headline="START/TRASA/META"
+    subheadline="Katowice/Ostrawa/ZloteHory/Międzylesie/LądekZdrój/KudowaZdrój/České Petrovice/Kłodzko"
+    text="08.02.2025/15.06.2025"
+    HeadlineBelow={false}
+  />
   <InfoBox
     ImageRight={false}
     headline="WYMAGANIA"
-    ImageSrc ={CrewPhoto.src}
-    ImageSecondSrc={CrewPhoto.src}
     text={`Jedziemy na gravelach w formule bikepackingu. Opony są ogranicznikiem - minimum 38, ale lepiej +40. Trasa ma sporo górskich singli, więc sprzęt musi sobie poradzić w takich warunkach. `}
   >
     <p class="paragraph">
-       Nie tylko sprzęt musi być odpowiedni, ale i Ty. Trasa nie jest bardzo wymagająca, ale jednak dystans, przewyższenia i kilka dni w siodle, może zmęczyć.
+      Nie tylko sprzęt musi być odpowiedni, ale i Ty. Trasa nie jest bardzo
+      wymagająca, ale jednak dystans, przewyższenia i kilka dni w siodle, może
+      zmęczyć.
     </p>
     <p class="paragraph">
-      Jeżeli chodzi o ekwipunek to bierzemy minimum, ale wszystko co potrzebne. Na stronie niebawem pojawi się info, co zabrać a co olać.
+      Jeżeli chodzi o ekwipunek to bierzemy minimum, ale wszystko co potrzebne.
+      Na stronie niebawem pojawi się info, co zabrać a co olać.
     </p>
-    
   </InfoBox>
   <InfoBox
     ImageRight={true}
     headline="NOCLEGI"
-    ImageSrc ={CrewPhoto2.src}
-    ImageSecondSrc={CrewPhoto2.src}
     text={`Codziennie śpimy w innym miejscu. Noclegi dla ekipy, która zadeklarowała się wczęsniej są klepnięte.`}
   >
-  <p class="paragraph">
-    Jeżeli chcesz dołączyć, to musisz zarezerwować sobie nocleg na własną rękę, lub zabrać ze sobą namiot. Noclegi, które mamy zarezerowane są w popularnych miejscówkach, więc nie powinno być problemu znaleźć coś dodatkowego.
-  </p>
-  <p class="paragraph">
-    Śpimy tam gdzie kończy się etap danego dnia, na tej podstawie możecie zacząć się rozglądać ew. <a href="https://wa.me/+48512275395"> Napisz do mnie</a> a podam Ci więcej szczegółow. 
-  </p>
+    <p class="paragraph">
+      Jeżeli chcesz dołączyć, to musisz zarezerwować sobie nocleg na własną
+      rękę, lub zabrać ze sobą namiot. Noclegi, które mamy zarezerowane są w
+      popularnych miejscówkach, więc nie powinno być problemu znaleźć coś
+      dodatkowego.
+    </p>
+    <p class="paragraph">
+      Śpimy tam gdzie kończy się etap danego dnia, na tej podstawie możecie
+      zacząć się rozglądać ew. <a href="https://wa.me/+48512275395">
+        Napisz do mnie</a
+      > a podam Ci więcej szczegółow.
+    </p>
   </InfoBox>
   <CenteredInfoBox
-  headline="Daj znać! "
-  text="08.02.2025/15.06.2025"
-  HeadlineBelow={false}
-/> 
-
+    headline="Daj znać! "
+    text="08.02.2025/15.06.2025"
+    HeadlineBelow={false}
+  />
 </BaseLayout>

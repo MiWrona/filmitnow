@@ -1,6 +1,4 @@
 ---
-import StravaPopupButton from "./StravaPopupButton.astro";
-
 const {
   headline,
   description,
@@ -11,7 +9,7 @@ const {
   descriptionThird,
   backgroundImageWebp,
   backgroundImageJpeg,
-  mapID,
+
   height = "700px",
   id,
 } = Astro.props;
@@ -150,7 +148,6 @@ const {
     >
     <div class="banner-details" id={`details-${id}`}>
       {descriptionSecond}
-      <StravaPopupButton embedId={mapID} id={id} />
     </div>
 
     <p>{descriptionThird}</p>
