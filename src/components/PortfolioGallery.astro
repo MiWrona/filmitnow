@@ -1,0 +1,121 @@
+---
+import movieHero from "../assets/video/hero.mp4";
+
+const videos = [
+  movieHero,
+  movieHero,
+  movieHero,
+  movieHero,
+  movieHero,
+  movieHero,
+  movieHero,
+];
+
+let selectedVideo = null;
+let currentIndex = 0;
+---
+
+<style>
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* ZAWSZE 3 kolumny */
+    gap: 1rem;
+  }
+  @media (max-width: 768px) {
+    .video-grid {
+      grid-template-columns: 1fr; /* Na małych ekranach 1 kolumna */
+    }
+  }
+  .video-wrapper {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  .video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border-radius: 50%;
+    padding: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+  }
+  .arrow.right {
+    right: -1rem;
+  }
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  .modal video {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 1rem;
+  }
+  .video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+  }
+  .small-beige-icon {
+    width: 75px;
+    height: 75px;
+    color: #D6C7AE; /* własny beżowy kolor */
+  }
+</style>
+
+<h2 class="text-3xl font-semibold text-center mb-6">Portfolio</h2>
+
+<div class="relative">
+  <div class="video-grid">
+    {videos.slice(currentIndex, currentIndex + 6).map((video, index) => (
+      <div class="video-wrapper" on:click={() => selectedVideo = video}>
+        <video src={video} muted autoplay loop playsinline preload="metadata" />
+        <div class="video-overlay">
+          <svg xmlns="http://www.w3.org/2000/svg" class="small-beige-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-5.197-3.027A1 1 0 008 9.027v5.946a1 1 0 001.555.832l5.197-3.027a1 1 0 000-1.664z" />
+          </svg>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  {currentIndex + 3 < videos.length && (
+    <div class="arrow right" on:click={() => currentIndex += 1}>
+      <svg xmlns="http://www.w3.org/2000/svg" class="small-beige-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </div>
+  )}
+</div>
+
+{selectedVideo && (
+  <div class="modal" on:click={() => selectedVideo = null}>
+    <video src={selectedVideo} controls autoplay></video>
+  </div>
+)}

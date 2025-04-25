@@ -5,7 +5,8 @@ import FullWidthBanner from "../components/FullWidthBanner.astro";
 import RoadDetails from "../components/RoadDetails.astro";
 import HeroVideo from "../components/Hero.astro";
 import HeroMovie from "../assets/video/hero.mp4";
-import PortfolioGallery from "../components/PortfolioGallery";
+import PortfolioGallery from "../components/PortfolioGallery.astro";
+import ReelsGallery from "../components/ReelsGallery.astro";
 
 const pageTitle = "Coig - product website boilerplate";
 ---
@@ -26,20 +27,7 @@ const pageTitle = "Coig - product website boilerplate";
 
 <BaseLayout>
   <HeroVideo videoSrc={HeroMovie} title="" subtitle="" />
-  <PortfolioGallery client:only="react" />
-  <FullWidthBanner
-    id="day1"
-    headline="Etap 1"
-    description={`Kato - Ostrava`}
-    date="08.06-09.06"
-    incline="Zobacz więcej"
-    descriptionSecond={`🚩
-    Wesele
-    `}
-    mapID="3339199849723845918"
-    backgroundImageWebp="/img/ema.webp"
-    backgroundImageJpeg="/img/ema.jpg"
-  >
-    <RoadDetails slot="details" distance="124km" up="716m" time="6h 18min*" />
-  </FullWidthBanner>
+
+  <PortfolioGallery />
+  <ReelsGallery
 </BaseLayout>
