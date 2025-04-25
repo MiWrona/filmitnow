@@ -1,0 +1,113 @@
+---
+const {
+  leftImages = [],
+  rightImages = [],
+  headline = "Your Headline Here",
+  subheadline = "Subheadline Here",
+  text = "Some inspiring text goes here.",
+} = Astro.props;
+---
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    gap: 1rem;
+    align-items: center;
+  }
+  .about-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .about-column {
+    overflow: hidden;
+    height: 100%;
+    max-height: 500px; /* lub dowolna wysokość, którą chcesz ograniczyć */
+    position: relative;
+  }
+  .about-image.overlap {
+    position: absolute;
+    top: 40%;
+    left: 20%;
+    z-index: 1;
+  }
+  .about-text {
+    text-align: center;
+    padding: 2rem;
+  }
+  .about-text h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  .about-text h3 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+    .about-column {
+      flex-direction: row;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .about-image.overlap {
+      position: static;
+      margin-top: -1rem;
+    }
+    .about-text {
+      padding: 1rem;
+    }
+  }
+</style>
+
+<div class="about-grid">
+  <!-- Left Column -->
+  <div class="about-column">
+    {
+      leftImages.length > 0 && (
+        <img src={leftImages[0]} alt="Left image 1" class="about-image" />
+      )
+    }
+    {
+      leftImages.length > 1 && (
+        <img
+          src={leftImages[1]}
+          alt="Left image 2"
+          class="about-image overlap"
+        />
+      )
+    }
+  </div>
+
+  <!-- Center Column -->
+  <div class="about-text">
+    <h2>{headline}</h2>
+    <h3>{subheadline}</h3>
+    <p>{text}</p>
+  </div>
+
+  <!-- Right Column -->
+  <div class="about-column">
+    {
+      rightImages.length > 0 && (
+        <img src={rightImages[0]} alt="Right image 1" class="about-image" />
+      )
+    }
+    {
+      rightImages.length > 1 && (
+        <img
+          src={rightImages[1]}
+          alt="Right image 2"
+          class="about-image overlap"
+        />
+      )
+    }
+  </div>
+</div>

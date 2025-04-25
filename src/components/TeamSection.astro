@@ -1,0 +1,63 @@
+---
+const { headline = "O nas", members = [] } = Astro.props;
+---
+
+<style>
+  .team-section {
+    padding: 4rem 1rem;
+    text-align: center;
+  }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .team-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .team-photo {
+    width: 100%;
+    max-width: 220px;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  .team-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1rem;
+  }
+  .team-role {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #444;
+    margin-top: 0.25rem;
+  }
+  .team-bio {
+    font-size: 0.875rem;
+    color: #666;
+    max-width: 300px;
+    margin-top: 0.75rem;
+  }
+</style>
+
+<section class="team-section">
+  <h2 class="text-3xl font-semibold">{headline}</h2>
+  <div class="team-grid">
+    {
+      members.map((member) => (
+        <div class="team-card">
+          <img src={member.photo} alt={member.name} class="team-photo" />
+          <div class="team-name">{member.name}</div>
+          <div class="team-role">{member.role}</div>
+          <div class="team-bio">{member.bio}</div>
+        </div>
+      ))
+    }
+  </div>
+</section>

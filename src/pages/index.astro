@@ -7,6 +7,13 @@ import HeroVideo from "../components/Hero.astro";
 import HeroMovie from "../assets/video/hero.mp4";
 import PortfolioGallery from "../components/PortfolioGallery.astro";
 import ReelsGallery from "../components/ReelsGallery.astro";
+import AboutSection from "../components/AboutSection.astro";
+import WeddingPhoto from "../assets/img/wedding.jpg";
+import TeamSection from "../components/TeamSection.astro";
+import Photo1 from "../assets/img/member1.jpg";
+import ContactSection from "../components/ContactSection.astro";
+import Logo from "../assets/img/logo.png";
+import SiteFooter from "../components/SiteFooter.astro";
 
 const pageTitle = "Coig - product website boilerplate";
 ---
@@ -26,8 +33,68 @@ const pageTitle = "Coig - product website boilerplate";
 </style>
 
 <BaseLayout>
-  <HeroVideo videoSrc={HeroMovie} title="" subtitle="" />
+  <div id="start">
+    <HeroVideo videoSrc={HeroMovie} title="" subtitle="" />
+  </div>
+  <div id="portfolio">
+    <PortfolioGallery />
+  </div>
+  <div id="reels">
+    <ReelsGallery />
+  </div>
 
-  <PortfolioGallery />
-  <ReelsGallery
+  <div id="o-nas">
+    <AboutSection
+      headline="FILMITNOW"
+      subheadline="Jesteśmy grupą która kocha produkcje filmową i w tej miłości potrafi przedstawić waszą miłość w najwaniejszym dla was dniu"
+      text="Pozwól nam przelać swoja miłość na nasz film"
+      leftImages={[WeddingPhoto.src, WeddingPhoto.src]}
+      rightImages={[WeddingPhoto.src, WeddingPhoto.src]}
+    />
+    <TeamSection
+      headline="O nas"
+      members={[
+        {
+          photo: Photo1.src,
+          name: "Krzysztof",
+          role: "Operator kamery",
+          bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod",
+        },
+        {
+          photo: Photo1.src,
+          name: "Marek",
+          role: "Operator kamery",
+          bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod",
+        },
+        {
+          photo: Photo1.src,
+          name: "Anna",
+          role: "Montażystka filmów",
+          bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod",
+        },
+        {
+          photo: Photo1.src,
+          name: "Ania",
+          role: "Frontažystka filmów",
+          bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod",
+        },
+      ]}
+    />
+    <div id="kontakt">
+      <ContactSection
+        headline="Zostańmy w kontakcie"
+        description="Zapewniamy niestandardowe usługi dla każdego ślubu. Pomóż nam dowiedzieć się więcej o Twoich uroczystościach, wypełniając poniższy formularz."
+        note="Przyjmujemy ograniczoną liczbę wydarzeń na rok 2025 + 2026. Czekamy na wiadomość od Ciebie!"
+        contact={{
+          phone: "970-803-0683",
+          email: "hello@flamefilms.co",
+        }}
+      />
+    </div>
+    <SiteFooter
+      logo="/logo-footer.svg"
+      instagram="https://instagram.com/filmitnow.pl"
+      gallery={[Logo.src, Logo.src, Logo.src, Logo.src]}
+    />
+  </div>
 </BaseLayout>

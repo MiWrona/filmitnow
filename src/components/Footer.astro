@@ -61,26 +61,21 @@ const { logoSrc = "/logo.svg", whatsappNumber = "1XXXXXXXXXX" } = Astro.props;
 </style>
 
 <footer>
-    <div class="footer-logo">
-      <img src={logoSrc} alt="Logo" />
-    </div>
-
-    <a
-      class="whatsapp-link"
-      href={`https://wa.me/${whatsappNumber}`}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      📞 Kontakt
-    </a>
+  <div class="footer-logo">
+    <img src={logoSrc.src} alt="Logo" />
   </div>
 
-  <div class="footer-copy">© wrona-sport.pl 2025</div>
-  <script>
-    import "../scripts/menu.js";
-  </script>
-  
+  <a
+    class="whatsapp-link"
+    href={`https://wa.me/${whatsappNumber}`}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    📞 Kontakt
+  </a>
 </footer>
 
-
-
+<div class="footer-copy">© wrona-sport.pl 2025</div>
+<script>
+  import "../scripts/menu.js";
+</script>
