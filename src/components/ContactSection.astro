@@ -111,7 +111,41 @@ const {
     <p><a href={`mailto:${contact.email}`}>{contact.email}</a></p>
   </div>
 
-  <form class="contact-form">
+  <form
+    class="contact-form"
+    action="https://api.web3forms.com/submit"
+    method="POST"
+    data-netlify="true"
+  >
+    <!-- Klucz dostępu Web3Forms -->
+    <input
+      type="hidden"
+      name="access_key"
+      value="4dd4f683-f4c3-4e68-a842-820e942fd1f8"
+    />
+
+    <!-- Dodatkowe pola ukryte (opcjonalne) -->
+    <input type="hidden" name="from_name" value="Twoja Strona" />
+    <input
+      type="hidden"
+      name="subject"
+      value="Nowa wiadomość z formularza kontaktowego"
+    />
+    <input
+      type="hidden"
+      name="redirect"
+      value="https://twojastrona.pl/dziekujemy"
+    />
+
+    <!-- Ochrona przed botami -->
+    <input
+      type="checkbox"
+      name="botcheck"
+      class="hidden"
+      style="display:none;"
+    />
+
+    <!-- Pola formularza -->
     <input type="text" name="names" placeholder="Wasze imiona" required />
     <input type="email" name="email" placeholder="Email" required />
     <input type="tel" name="phone" placeholder="Telefon" required />
