@@ -6,6 +6,7 @@ import RoadDetails from "../components/RoadDetails.astro";
 import HeroVideo from "../components/Hero.astro";
 import HeroMovie from "../assets/video/hero.mp4";
 import PortfolioGallery from "../components/PortfolioGallery.astro";
+import PortfolioGallerySwiper from "../components/PortfolioGallerySwipper.astro";
 import ReelsGallery from "../components/ReelsGallery.astro";
 import AboutSection from "../components/AboutSection.astro";
 import WeddingPhoto from "../assets/img/wedding.jpg";
@@ -15,9 +16,24 @@ import ContactSection from "../components/ContactSection.astro";
 import Logo from "../assets/img/logo.png";
 import SiteFooter from "../components/SiteFooter.astro";
 
+import video from "../assets/video/hero.mp4";
+import video1 from "../assets/video/video (1).mp4";
+import video2 from "../assets/video/video (2).mp4";
+import video3 from "../assets/video/video (3).mp4";
+import video4 from "../assets/video/video (4).mp4";
+import video5 from "../assets/video/video (5).mp4";
+import video6 from "../assets/video/video (6).mp4";
+import video7 from "../assets/video/video (7).mp4";
+import video8 from "../assets/video/video (8).mp4";
+
+const videos = [
+  video, video1, video2, video3, video, video, 
+  video, video4, video5, video6, video7, video8 
+];
+
+
 const pageTitle = "Coig - product website boilerplate";
 ---
-
 <style>
   /* Na małych ekranach – zmniejsz top */
 
@@ -36,9 +52,11 @@ const pageTitle = "Coig - product website boilerplate";
   <div id="start">
     <HeroVideo videoSrc={HeroMovie} title="" subtitle="" />
   </div>
-  <div id="portfolio">
-    <PortfolioGallery />
-  </div>
+  <!-- <div id="portfolio">
+    <PortfolioGallery  videos={videos} />
+    
+  </div> -->
+  <PortfolioGallerySwiper videos={videos} />
   <div id="reels">
     <ReelsGallery />
   </div>

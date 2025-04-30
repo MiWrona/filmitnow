@@ -1,0 +1,158 @@
+---
+import video from "../assets/video/hero.mp4";
+
+// Przyjmujemy propsy
+const { videos = [video, video, video, video, video, video] } = Astro.props;
+
+// Przygotowujemy obiekt breakpoints
+const swiperBreakpoints = {
+  768: { slidesPerView: 1 },
+  1024: { slidesPerView: 2 }
+};
+---
+
+<h2 class="text-3xl font-semibold text-center mb-6">Portfolio</h2>
+
+<swiper-container
+  navigation="true"
+  loop="true"
+  slides-per-view="1"
+>
+  {
+    Array.from({ length: Math.ceil(videos.length / 6) }, (_, slideIndex) => (
+      <swiper-slide>
+        <div class="video-grid">
+          {
+            videos
+              .slice(slideIndex * 6, slideIndex * 6 + 6)
+              .map((videoSrc, index) => (
+                <div class="video-wrapper" data-src={videoSrc} key={index}>
+                  <video src={videoSrc} muted autoplay loop playsinline preload="metadata" />
+                </div>
+              ))
+          }
+        </div>
+      </swiper-slide>
+    ))
+  }
+</swiper-container>
+
+
+<div id="videoModal" class="modal">
+  <button class="modal-close" id="modalCloseBtn">&times;</button>
+  <video id="modalVideo" controls autoplay muted playsinline></video>
+</div>
+
+<style>
+  swiper-container {
+    width: 100%;
+    height: 100%;
+    --swiper-navigation-color: black;
+    --swiper-navigation-size: 24px;
+    padding: 2rem 0;
+  }
+
+  swiper-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .video-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .video-wrapper {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .modal video {
+    max-width: 90vw;
+    max-height: 85vh;
+    border-radius: 1rem;
+    object-fit: contain;
+  }
+
+  .modal.active {
+    display: flex;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 2rem;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+  }
+</style>
+
+<script type="module">
+  import 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js';
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const wrappers = document.querySelectorAll(".video-wrapper");
+    const modal = document.getElementById("videoModal");
+    const modalVideo = document.getElementById("modalVideo");
+    const closeBtn = document.getElementById("modalCloseBtn");
+
+    wrappers.forEach((wrapper) => {
+      wrapper.addEventListener("click", () => {
+        const src = wrapper.getAttribute("data-src");
+        modalVideo.src = src;
+        modalVideo.currentTime = 0;
+        modal.classList.add("active");
+      });
+    });
+
+    closeBtn.addEventListener("click", () => {
+      modal.classList.remove("active");
+      modalVideo.pause();
+      modalVideo.src = "";
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.remove("active");
+        modalVideo.pause();
+        modalVideo.src = "";
+      }
+    });
+  });
+</script>
