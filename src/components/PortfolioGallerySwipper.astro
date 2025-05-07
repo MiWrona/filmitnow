@@ -27,7 +27,7 @@ const swiperBreakpoints = {
               .slice(slideIndex * 6, slideIndex * 6 + 6)
               .map((videoSrc, index) => (
                 <div class="video-wrapper" data-src={videoSrc} key={index}>
-                  <video src={videoSrc} muted autoplay loop playsinline preload="metadata" />
+                  <video src={videoSrc} muted  loop playsinline preload="metadata" />
                 </div>
               ))
           }

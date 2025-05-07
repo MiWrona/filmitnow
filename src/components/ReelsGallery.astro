@@ -40,6 +40,9 @@ let selectedReel = null;
     object-fit: cover;
     border-radius: 1rem;
   }
+
+
+
   .modal {
     display: none;
     position: fixed;
@@ -81,7 +84,7 @@ let selectedReel = null;
   {
     reels.map((reel, index) => (
       <div class="reel-wrapper" data-src={reel}>
-        <video src={reel} muted autoplay loop playsinline preload="metadata" />
+        <video src={reel} muted  loop playsinline preload="metadata" />
       </div>
     ))
   }
