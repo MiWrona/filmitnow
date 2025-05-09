@@ -277,3 +277,10 @@ nav {
     transform: translate(0, -2px);
   }
 }
+
+
+
+/* Helpers */
+form, select, input, textarea, button {
+  font-family: 'Inter', sans-serif;
+}

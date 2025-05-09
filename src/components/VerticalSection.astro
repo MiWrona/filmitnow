@@ -1,0 +1,109 @@
+---
+const { images = [] } = Astro.props;
+
+import { Image } from "astro:assets";
+
+import Logo from "../assets/img/logo.png";
+
+
+
+import Logo from "../assets/img/logo.png";
+---
+
+<section class="instagram-section">
+  <div class="instagram-info">
+    <p class="follow-text">Znajdź nas na insta</p>
+    <p class="handle">@filmitnow</p>
+    <div class="logo">
+        <a href="/">
+            <Image
+              class="logo-main"
+              src={Logo}
+              alt="A bird sitting on a nest of eggs."
+            />
+          </a>
+    </div>
+  </div>
+
+
+    {images.map((src, index) => (
+      <div class="gallery-item" key={index}>
+        <img src={src} alt={`Instagram image ${index + 1}`} />
+      </div>
+    ))}
+
+</section>
+
+<style>
+  .instagram-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: #f5f5f2; /* Jasne tło podobne do zrzutu */
+    flex-wrap: wrap;
+  }
+
+  .instagram-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 200px;
+    text-align: center;
+    flex: 0 0 auto;
+  }
+
+  .follow-text {
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+
+  .handle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  .logo {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .instagram-gallery {
+    display: flex;
+    gap: 1rem;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .gallery-item {
+    flex: 0 1 200px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 0.5rem;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .instagram-section {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .instagram-gallery {
+      justify-content: center;
+    }
+  }
+</style>

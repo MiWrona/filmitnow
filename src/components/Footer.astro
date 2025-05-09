@@ -1,5 +1,5 @@
 ---
-const { logoSrc = "/logo.svg", whatsappNumber = "1XXXXXXXXXX" } = Astro.props;
+const { logoSrc = "../assets/img/logo.png", whatsappNumber = "1XXXXXXXXXX" } = Astro.props;
 ---
 
 <style>
@@ -62,7 +62,7 @@ const { logoSrc = "/logo.svg", whatsappNumber = "1XXXXXXXXXX" } = Astro.props;
 
 <footer>
   <div class="footer-logo">
-    <img src={logoSrc.src} alt="Logo" />
+    <img src={logoSrc} alt="Logo" />
   </div>
 
   <a

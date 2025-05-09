@@ -9,58 +9,73 @@ const {
   },
 } = Astro.props;
 ---
+<script>
+  const form = document.getElementById('contact-form');
+  const successMessage = document.getElementById('success-message');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: form.method,
+      body: formData,
+      headers: {
+        Accept: 'application/json',
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          form.reset();
+          successMessage.classList.add('active');
+        } else {
+          response.json().then((data) => {
+            alert(data.message || 'Wystąpił błąd podczas wysyłania formularza.');
+          });
+        }
+      })
+      .catch((error) => {
+        alert('Wystąpił błąd podczas wysyłania formularza.');
+      });
+  });
+</script>
 
 <style>
   .contact-section {
     background-color: #f8f7f4;
     padding: 4rem 1rem;
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    align-items: center;
-    gap: 2rem;
-    text-align: center;
-    font-family: "Cormorant Garamond", serif;
    
   }
+
   .contact-headline {
     font-size: 2rem;
     font-weight: 500;
     font-style: italic;
     text-transform: uppercase;
-    font-family: "Playfair Display", serif;
+    font-family: 'Playfair Display', serif;
+    text-align: center;
   }
-  .contact-headline span {
-    font-style: normal;
-    font-weight: 600;
-  }
+
   .contact-text {
     font-size: 1rem;
     line-height: 1.6;
     color: #333;
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+    padding-RIGHT: 2rem;
   }
-  .contact-box {
-    background-color: #e6e6e6;
-    padding: 1rem;
-    text-align: right;
-    font-size: 0.9rem;
-    color: #333;
-    border-radius: 0.25rem;
-  }
-  .contact-box a {
-    font-style: italic;
-    color: #666;
-    text-decoration: none;
-  }
+
   .contact-form {
-    grid-column: 1 / -1;
-    margin-top: 3rem;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
   }
+
   .contact-form input,
   .contact-form select,
   .contact-form textarea {
@@ -68,18 +83,26 @@ const {
     border: 1px solid #ccc;
     border-radius: 0.25rem;
     font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
   }
+
   .contact-form textarea {
+    grid-column: 1 / -1;
     min-height: 150px;
   }
+
   .contact-form label {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     font-size: 0.875rem;
     color: #444;
+    grid-column: 1 / -1;
   }
+
   .contact-form button {
+    grid-column: 1 / -1;
     background-color: #333;
     color: white;
     padding: 0.75rem;
@@ -88,38 +111,55 @@ const {
     border-radius: 0.25rem;
     cursor: pointer;
   }
+
   .contact-form button:hover {
     background-color: #111;
   }
+
+  .success-message {
+    display: none;
+    text-align: center;
+    font-size: 1.2rem;
+    color: green;
+    margin-top: 1rem;
+  }
+
+  .success-message.active {
+    display: block;
+  }
+
+  .content-contact-wrapper {
+    display: flex;
+  }
+  .label-form {
+    display: flex;
+    grid-column: 1 !important;
+    font-size: 15px;
+  }
+  .label-form input{
+    max-width: 30px;
+  }
+
   @media (max-width: 768px) {
-    .contact-section {
+    .contact-form {
       grid-template-columns: 1fr;
-      text-align: center;
-    }
-    .contact-box {
-      text-align: center;
     }
   }
 </style>
-
 <section class="contact-section">
-  <h2 class="contact-headline">
-    <span>{headline}</span>
-  </h2>
+  <div class="content-contact-wrapper">
+  <h2 class="contact-headline">Zostańmy w kontakcie</h2>
   <div class="contact-text">
-    <p>{description}</p>
-    <p style="margin-top: 1rem">{note}</p>
+    <p>Zapewniamy niestandardowe usługi dla każdego ślubu. Pomóż nam dowiedzieć się więcej o Twoich uroczystościach, wypełniając poniższy formularz.</p>
+    <p style="margin-top: 1rem">Przyjmujemy ograniczoną liczbę wydarzeń na rok 2025 + 2026. Czekamy na wiadomość od Ciebie!</p>
   </div>
-  <div class="contact-box">
-    <p><strong>P:</strong> {contact.phone}</p>
-    <p><a href={`mailto:${contact.email}`}>{contact.email}</a></p>
-  </div>
-
+</div>
+<div class="form-wrapper">
   <form
     class="contact-form"
+    id="contact-form"
     action="https://api.web3forms.com/submit"
     method="POST"
-    data-netlify="true"
   >
     <!-- Klucz dostępu Web3Forms -->
     <input
@@ -134,11 +174,6 @@ const {
       type="hidden"
       name="subject"
       value="Nowa wiadomość z formularza kontaktowego"
-    />
-    <input
-      type="hidden"
-      name="redirect"
-      value="https://twojastrona.pl/dziekujemy"
     />
 
     <!-- Ochrona przed botami -->
@@ -156,8 +191,6 @@ const {
     <input type="date" name="date" placeholder="Data ślubu" required />
     <input type="text" name="venue" placeholder="Sala weselna" />
     <input type="text" name="church" placeholder="Adres kościoła" />
-    <input type="text" name="brideAddress" placeholder="Adres Panny Młodej" />
-    <input type="text" name="groomAddress" placeholder="Adres Pana Młodego" />
     <input type="text" name="photographer" placeholder="Dane do fotografa" />
     <select name="guests" required>
       <option value="">Spodziewana liczba gości</option>
@@ -166,20 +199,27 @@ const {
       <option value="101_150">101–150</option>
       <option value="powyzej_150">powyżej 150</option>
     </select>
-    <input
-      type="text"
-      name="budget"
-      placeholder="Przewidywany budżet na film"
-    />
+    <select name="budget" required>
+      <option value="">Przewidywany budżet</option>
+      <option value="5000">5000zł</option>
+      <option value="6500">6500zł</option>
+      <option value="8000">8000zł</option>
+    </select>
     <input type="text" name="foundUs" placeholder="Jak nas znalazłeś?" />
     <textarea
       name="plans"
       placeholder="Opowiedz nam trochę o sobie, swoich planach i tym, czego szukasz!"
-      required></textarea>
-    <label>
+      required
+    ></textarea>
+    <label class="label-form">
       <input type="checkbox" name="rodo" required />
       Wyrażam zgodę na przetwarzanie danych osobowych w celu kontaktu.
     </label>
     <button type="submit">Wyślij wiadomość</button>
+    <div id="success-message" class="success-message">
+      Dziękujemy za wysłanie wiadomości! Skontaktujemy się z tobą niebawem.
+    </div>
   </form>
+</div>
 </section>
+

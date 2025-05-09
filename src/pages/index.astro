@@ -1,21 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Toggle from "../components/Toggle.astro";
-import FullWidthBanner from "../components/FullWidthBanner.astro";
-import RoadDetails from "../components/RoadDetails.astro";
 import HeroVideo from "../components/Hero.astro";
-import HeroMovie from "../assets/video/hero.mp4";
-import PortfolioGallery from "../components/PortfolioGallery.astro";
 import PortfolioGallerySwiper from "../components/PortfolioGallerySwipper.astro";
 import ReelsGallery from "../components/ReelsGallery.astro";
 import AboutSection from "../components/AboutSection.astro";
-import WeddingPhoto from "../assets/img/wedding.jpg";
 import TeamSection from "../components/TeamSection.astro";
-import Photo1 from "../assets/img/member1.jpg";
 import ContactSection from "../components/ContactSection.astro";
-import Logo from "../assets/img/logo.png";
-import SiteFooter from "../components/SiteFooter.astro";
+import VerticalSection from "../components/VerticalSection.astro";
+import WeddingPhoto from "../assets/img/wedding.jpg";
+import Photo1 from "../assets/img/member1.jpg";
 
+import HeroMovie from "../assets/video/hero.mp4";
 import video from "../assets/video/hero.mp4";
 import video1 from "../assets/video/video (1).mp4";
 import video2 from "../assets/video/video (2).mp4";
@@ -26,13 +21,19 @@ import video6 from "../assets/video/video (6).mp4";
 import video7 from "../assets/video/video (7).mp4";
 import video8 from "../assets/video/video (8).mp4";
 
+
+
+const images = [
+  WeddingPhoto.src, Photo1.src, WeddingPhoto.src, Photo1.src
+];
+
 const videos = [
   video, video1, video2, video3, video, video, 
   video, video4, video5, video6, video7, video8 
 ];
 
 
-const pageTitle = "Coig - product website boilerplate";
+const pageTitle = "FilmItNow - Twój film ślubny";
 ---
 <style>
   /* Na małych ekranach – zmniejsz top */
@@ -102,15 +103,13 @@ const pageTitle = "Coig - product website boilerplate";
         description="Zapewniamy niestandardowe usługi dla każdego ślubu. Pomóż nam dowiedzieć się więcej o Twoich uroczystościach, wypełniając poniższy formularz."
         note="Przyjmujemy ograniczoną liczbę wydarzeń na rok 2025 + 2026. Czekamy na wiadomość od Ciebie!"
         contact={{
-          phone: "970-803-0683",
-          email: "hello@flamefilms.co",
+          phone: "888-061-277",
+          email: "filmitnow.pl@gmail.com",
         }}
       />
     </div>
-    <SiteFooter
-      logo="/logo-footer.svg"
-      instagram="https://instagram.com/filmitnow.pl"
-      gallery={[Logo.src, Logo.src, Logo.src, Logo.src]}
-    />
+
+    <VerticalSection images={images} /> 
+  
   </div>
 </BaseLayout>
