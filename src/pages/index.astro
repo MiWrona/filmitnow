@@ -1,4 +1,7 @@
 ---
+import client from "../../lib/datocms.ts";
+import { HOMEPAGE_QUERY } from "../../queries/homepage.ts";
+
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroVideo from "../components/Hero.astro";
 import PortfolioGallerySwiper from "../components/PortfolioGallerySwipper.astro";
@@ -34,7 +37,14 @@ const videos = [
 
 
 const pageTitle = "FilmItNow - Twój film ślubny";
+
+const data = await client.request(HOMEPAGE_QUERY);
+
+const homepage = data.homepage;
+const team = data.allTeamMembers;
 ---
+
+
 <style>
   /* Na małych ekranach – zmniejsz top */
 
@@ -113,3 +123,4 @@ const pageTitle = "FilmItNow - Twój film ślubny";
   
   </div>
 </BaseLayout>
+
