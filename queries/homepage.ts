@@ -3,9 +3,7 @@ export const HOMEPAGE_QUERY = `
   homepage {
     heroTitle
     heroSubtitle
-    heroVideo {
-      url
-    }
+    heroVideo
     portfolioVideos {
       url
     }

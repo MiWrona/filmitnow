@@ -1,6 +1,5 @@
 ---
-import client from "../../lib/datocms.ts";
-import { HOMEPAGE_QUERY } from "../../queries/homepage.ts";
+import { getHomepage } from '../../lib/wp.ts';
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroVideo from "../components/Hero.astro";
@@ -25,6 +24,7 @@ import video7 from "../assets/video/video (7).mp4";
 import video8 from "../assets/video/video (8).mp4";
 
 
+const homepage = await getHomepage();
 
 const images = [
   WeddingPhoto.src, Photo1.src, WeddingPhoto.src, Photo1.src
@@ -38,12 +38,9 @@ const videos = [
 
 const pageTitle = "FilmItNow - Twój film ślubny";
 
-const data = await client.request(HOMEPAGE_QUERY);
+console.log("HOMEPAGE:", homepage);
 
-const homepage = data.homepage;
-const team = data.allTeamMembers;
 ---
-
 
 <style>
   /* Na małych ekranach – zmniejsz top */
@@ -61,7 +58,17 @@ const team = data.allTeamMembers;
 
 <BaseLayout>
   <div id="start">
-    <HeroVideo videoSrc={HeroMovie} title="" subtitle="" />
+
+    {homepage && (
+      <HeroVideo
+        videoSrc={homepage.heroVideoUrl ?? ""}
+        title={homepage.heroTitle ?? ""}
+        subtitle={homepage.heroSubtitle ?? ""}
+      />
+    )}
+
+
+
   </div>
 
   <div id="portfolio">
