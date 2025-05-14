@@ -1,6 +1,7 @@
 import { request, gql } from 'graphql-request';
 
 const endpoint = 'http://admin.filmitnow.pl/graphql';
+const toHttp = (url: string) => url.replace('https://admin.filmitnow.pl', 'http://admin.filmitnow.pl');
 
 export async function getHomepage() {
   const query = gql`
@@ -35,26 +36,26 @@ export async function getHomepage() {
 
     const portfolioVideos = (homepage.portfolioVideos ?? "")
       .split("\n")
-      .map((url) => url.trim())
+      .map((url) => toHttp(url.trim()))
       .filter(Boolean);
 
     const reelsVideos = (homepage.reelsVideos ?? "")
       .split("\n")
-      .map((url) => url.trim())
+      .map((url) => toHttp(url.trim()))
       .filter(Boolean);
 
     const aboutImagesLeft = (homepage.aboutImagesLeft ?? "")
       .split("\n")
-      .map((url) => url.trim())
+      .map((url) => toHttp(url.trim()))
       .filter(Boolean);
 
     const aboutImagesRight = (homepage.aboutImagesRight ?? "")
       .split("\n")
-      .map((url) => url.trim())
+      .map((url) => toHttp(url.trim()))
       .filter(Boolean);
 
     return {
-      heroVideoUrl: homepage.heroVideoUrl,
+      heroVideoUrl: toHttp(homepage.heroVideoUrl),
       portfolioVideos,
       reelsVideos,
       aboutHeadline: homepage.aboutHeadline,
