@@ -2,7 +2,7 @@
 // Możesz też przekazać propsy np. title, subtitle
 const {
   videoSrc = "",
- 
+  title = "FilmItNow",
 } = Astro.props;
 ---
 
@@ -74,7 +74,8 @@ const {
     <div class="hero-content">
 
         <slot />
-  
+      <h1>{title}</h1>
+
     </div>
   </div>
 </section>

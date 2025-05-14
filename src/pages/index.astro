@@ -23,10 +23,7 @@ const homepage = await getHomepage();
 const videos = homepage?.portfolioVideos ?? [];
 const reels = homepage?.reelsVideos ?? [];
 
-
 const pageTitle = "FilmItNow - Twój film ślubny";
-
-console.log("HOMEPAGE:", homepage);
 
 ---
 
@@ -47,12 +44,12 @@ console.log("HOMEPAGE:", homepage);
 <BaseLayout>
   <div id="start">
 
-    {homepage?.heroVideoUrl && (
       <HeroVideo
         videoSrc={homepage.heroVideoUrl ?? ""}
-        
+        title={homepage.heroTitle ?? ""}
+
       />
-    )}
+
 
   </div>
 

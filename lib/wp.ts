@@ -7,6 +7,7 @@ export async function getHomepage() {
     query {
       page(id: "6", idType: DATABASE_ID) {
         acf {
+          heroTitle
           heroVideoUrl
           portfolioVideos
           reelsVideos
@@ -30,6 +31,7 @@ export async function getHomepage() {
       .filter(Boolean);
 
     return {
+      heroTitle: homepage.heroTitle,
       heroVideoUrl: homepage.heroVideoUrl,
       portfolioVideos,
       reelsVideos
