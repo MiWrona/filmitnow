@@ -1,5 +1,5 @@
 ---
-import { getHomepage } from '../../lib/wp.ts';
+import { getHomepage, getTeamMembers } from '../../lib/wp.ts';
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroVideo from "../components/Hero.astro";
@@ -19,9 +19,12 @@ const images = [
   WeddingPhoto.src, Photo1.src, WeddingPhoto.src, Photo1.src
 ];
 
+
 const homepage = await getHomepage();
+const team = await getTeamMembers();
 const videos = homepage?.portfolioVideos ?? [];
 const reels = homepage?.reelsVideos ?? [];
+
 
 const pageTitle = "FilmItNow - Twój film ślubny";
 
@@ -46,8 +49,6 @@ const pageTitle = "FilmItNow - Twój film ślubny";
 
       <HeroVideo
         videoSrc={homepage.heroVideoUrl ?? ""}
-        title={homepage.heroTitle ?? ""}
-
       />
 
 
@@ -62,50 +63,22 @@ const pageTitle = "FilmItNow - Twój film ślubny";
 
   <div id="o-nas">
     <AboutSection
-      headline="FILMITNOW"
-      subheadline="Artystycznie dokumentujemy największą przygodę życia, staramy się stworzyć film, który naprawdę odzwierciedla Ciebie i Twoje najlepsze wspomnienia. Jesteśmy niedużym zespołem produkcyjnym specjalizującym się w rejestrowaniu celowych, wielodniowych wydarzeń. Znajdujemy się w Katowicach i dostępni jesteśmy na całym świecie."
-      leftImages={[WeddingPhoto.src, WeddingPhoto.src]}
-      rightImages={[WeddingPhoto.src, WeddingPhoto.src]}
+      headline={homepage.aboutHeadline ?? ""}
+      subheadline={homepage.aboutSubheadline ?? ""}
+      text={homepage.aboutText ?? ""}
+      leftImages={homepage.aboutImagesLeft ?? []}
+      rightImages={homepage.aboutImagesRight ?? []}
     />
-    <TeamSection
-      headline="O nas"
-      members={[
-        {
-          photo: Photo1.src,
-          name: "Milan",
-          role: "Operator kamery",
-          bio: "Absolwent Ostravskiego Uniwerystetu Master of Arts z wieloletnim doświadczeniem w pracy w branży filmowej",
-        },
-        {
-          photo: Photo1.src,
-          name: "Piotrek",
-          role: "Operator kamery",
-          bio: "Entuzjasta filmów automotive i dynamicznych ujęć, wieloletnie doświadczenie w branży usług weselnych",
-        },
-        {
-          photo: Photo1.src,
-          name: "Iza",
-          role: "Montażystka filmów",
-          bio: "Doświadczona montażystka filmów ślubnych oraz związanych z mediami społecznościowymi.",
-        },
-        {
-          photo: Photo1.src,
-          name: "Klaudia",
-          role: "Postprodukcja filmów",
-          bio: "Dba o jakość kolorów oraz dźwięku w filmie, wieloletnie doświadczenie w branży",
-        },
-      ]}
-    />
+    <TeamSection headline="Zespół" members={team} />
     <div id="kontakt">
       <ContactSection
-        headline="Zostańmy w kontakcie"
-        description="Zapewniamy niestandardowe usługi dla każdego ślubu. Pomóż nam dowiedzieć się więcej o Twoich uroczystościach, wypełniając poniższy formularz."
-        note="Przyjmujemy ograniczoną liczbę wydarzeń na rok 2025 + 2026. Czekamy na wiadomość od Ciebie!"
-        contact={{
-          phone: "888-061-277",
-          email: "filmitnow.pl@gmail.com",
-        }}
-      />
+  headline={homepage.formLeftText}
+  description={homepage.formMainText}
+  contact={{
+    phone: homepage.formPhone,
+    email: homepage.formEmail,
+  }}
+/>
     </div>
 
     <VerticalSection images={images} /> 

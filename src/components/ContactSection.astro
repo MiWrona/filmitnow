@@ -2,7 +2,7 @@
 const {
   headline = "Zostańmy w kontakcie",
   description = "Zapewniamy niestandardowe usługi dla każdego ślubu. Pomóż nam dowiedzieć się więcej o Twoich uroczystościach, wypełniając poniższy formularz.",
-  note = "Przyjmujemy ograniczoną liczbę wydarzeń na rok 2025 + 2026. Czekamy na wiadomość od Ciebie!",
+  note = "",
   contact = {
     phone: "970-803-0683",
     email: "hello@flamefilms.co",
@@ -87,6 +87,22 @@ const {
     box-sizing: border-box;
   }
 
+  .contact-box {
+    background-color: #e6e6e6;
+    padding: 1rem;
+    text-align: right;
+    font-size: 0.9rem;
+    color: #333;
+    border-radius: 0.25rem;
+}
+  
+
+  .contact-box a {
+    font-style: italic;
+    color: #666;
+    text-decoration: none;
+  }
+
   .contact-form textarea {
     grid-column: 1 / -1;
     min-height: 150px;
@@ -130,6 +146,7 @@ const {
 
   .content-contact-wrapper {
     display: flex;
+    position: relative;
   }
   .label-form {
     display: flex;
@@ -137,7 +154,7 @@ const {
     font-size: 15px;
   }
   .label-form input{
-    max-width: 30px;
+    max-width: ;
   }
 
   @media (max-width: 768px) {
@@ -145,14 +162,35 @@ const {
       grid-template-columns: 1fr;
     }
   }
+
+
+@media (max-width: 1210px) {
+   .contact-box{
+    top: 0;
+    position: relative;
+    max-height: 100px;
+  }
+}
+@media (max-width: 764px) {
+   .content-contact-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+}
 </style>
 <section class="contact-section">
   <div class="content-contact-wrapper">
-  <h2 class="contact-headline">Zostańmy w kontakcie</h2>
-  <div class="contact-text">
-    <p>Zapewniamy niestandardowe usługi dla każdego ślubu. Pomóż nam dowiedzieć się więcej o Twoich uroczystościach, wypełniając poniższy formularz.</p>
-    <p style="margin-top: 1rem">Przyjmujemy ograniczoną liczbę wydarzeń na rok 2025 + 2026. Czekamy na wiadomość od Ciebie!</p>
-  </div>
+    <h2 class="contact-headline">{headline}</h2>
+    <div class="contact-text">
+      <p>{description}</p>
+      <p style="margin-top: 1rem">{note}</p>
+    </div>
+
+    <div class="contact-box">
+      <p><strong>P:</strong> {contact.phone}</p>
+      <p><a href={`mailto:${contact.email}`}>{contact.email}</a></p>
+    </div>
+  
 </div>
 <div class="form-wrapper">
   <form
