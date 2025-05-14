@@ -1,16 +1,6 @@
 ---
-import movieHero from "../assets/video/hero.mp4";
 
-const reels = [
-  movieHero,
-  movieHero,
-  movieHero,
-  movieHero,
-  movieHero,
-  movieHero,
-  movieHero,
-  movieHero,
-];
+const { reels = [] } = Astro.props;
 
 let selectedReel = null;
 ---
