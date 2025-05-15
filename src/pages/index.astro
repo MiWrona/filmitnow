@@ -1,5 +1,5 @@
 ---
-import { getHomepage, getTeamMembers } from '../../lib/wp.ts';
+import { getHomepage, getTeamMembers } from "../../lib/wp.ts";
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroVideo from "../components/Hero.astro";
@@ -12,22 +12,14 @@ import VerticalSection from "../components/VerticalSection.astro";
 import WeddingPhoto from "../assets/img/wedding.jpg";
 import Photo1 from "../assets/img/member1.jpg";
 
-
-
-
-const images = [
-  WeddingPhoto.src, Photo1.src, WeddingPhoto.src, Photo1.src
-];
-
+const images = [WeddingPhoto.src, Photo1.src, WeddingPhoto.src, Photo1.src];
 
 const homepage = await getHomepage();
 const team = await getTeamMembers();
 const videos = homepage?.portfolioVideos ?? [];
 const reels = homepage?.reelsVideos ?? [];
 
-
 const pageTitle = "FilmItNow - Twój film ślubny";
-
 ---
 
 <style>
@@ -46,17 +38,12 @@ const pageTitle = "FilmItNow - Twój film ślubny";
 
 <BaseLayout>
   <div id="start">
-
-      <HeroVideo
-        videoSrc={homepage.heroVideoUrl ?? ""}
-      />
-
-
+    <HeroVideo videoSrc={homepage.heroVideoUrl ?? ""} />
   </div>
 
   <div id="portfolio">
-  <PortfolioGallerySwiper videos={videos} />
-</div>
+    <PortfolioGallerySwiper videos={videos} />
+  </div>
   <div id="reels">
     <ReelsGallery reels={reels} />
   </div>
@@ -69,20 +56,32 @@ const pageTitle = "FilmItNow - Twój film ślubny";
       leftImages={homepage.aboutImagesLeft ?? []}
       rightImages={homepage.aboutImagesRight ?? []}
     />
+
+
     <TeamSection headline="Zespół" members={team} />
+
+
     <div id="kontakt">
       <ContactSection
-  headline={homepage.formLeftText}
-  description={homepage.formMainText}
-  contact={{
-    phone: homepage.formPhone,
-    email: homepage.formEmail,
-  }}
-/>
+        headline={homepage.formLeftText}
+        description={homepage.formMainText}
+        contact={{
+          phone: homepage.formPhone,
+          email: homepage.formEmail,
+        }}
+      />
     </div>
 
-    <VerticalSection images={images} /> 
-  
+    
+
+    <VerticalSection
+    followText={homepage.followText}
+    instaLink={homepage.instaLink}
+    whatsappLink={homepage.whatsappLink}
+    instaLogo={homepage.instaLogo}
+    whatsappLogo={homepage.whatsappLogo}
+    images={homepage.bottomGallery}
+     
+     />
   </div>
 </BaseLayout>
-

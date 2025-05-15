@@ -1,11 +1,11 @@
 import { request, gql } from 'graphql-request';
 
 const endpoint = 'http://admin.filmitnow.pl/graphql';
-const toHttp = (url: string) => url.replace('https://admin.filmitnow.pl', 'http://admin.filmitnow.pl');
+const toHttp = (url: string) => url?.replace('https://admin.filmitnow.pl', 'http://admin.filmitnow.pl');
 
 export async function getHomepage() {
   const query = gql`
-    query {
+     query {
       page(id: "6", idType: DATABASE_ID) {
         acf {
           heroVideoUrl
@@ -20,9 +20,42 @@ export async function getHomepage() {
           formMainText
           formEmail
           formPhone
+          socialText
+          instaLink
+          whastsappLink
+          instaLogo {
+  node {
+    sourceUrl
+  }
+}
+whatsappLogo {
+  node {
+    sourceUrl
+  }
+}
+bottom_gallery_photo_i {
+  node {
+    sourceUrl
+  }
+}
+bottom_gallery_photo_ii {
+  node {
+    sourceUrl
+  }
+}
+bottom_gallery_photo_iii {
+  node {
+    sourceUrl
+  }
+}
+bottom_gallery_photo_iiii {
+  node {
+    sourceUrl
+  }
+}
         }
       }
-    }
+}
   `;
 
   try {
@@ -54,6 +87,15 @@ export async function getHomepage() {
       .map((url) => toHttp(url.trim()))
       .filter(Boolean);
 
+    const bottomGallery = [
+      homepage.bottom_gallery_photo_i?.sourceUrl,
+      homepage.bottom_gallery_photo_ii?.sourceUrl,
+      homepage.bottom_gallery_photo_iiI?.sourceUrl,
+      homepage.bottom_gallery_photo_iiii?.sourceUrl,
+    ]
+      .map(toHttp)
+      .filter(Boolean);
+
     return {
       heroVideoUrl: toHttp(homepage.heroVideoUrl),
       portfolioVideos,
@@ -66,7 +108,18 @@ export async function getHomepage() {
       formLeftText: homepage.formLeftText,
       formMainText: homepage.formMainText,
       formEmail: homepage.formEmail,
-      formPhone: homepage.formPhone
+      formPhone: homepage.formPhone,
+      followText: homepage.socialText,
+      instaLink: homepage.instaLink,
+      whatsappLink: homepage.whastsappLink,
+      instaLogo: toHttp(homepage.instaLogo?.node?.sourceUrl),
+      whatsappLogo: toHttp(homepage.whatsappLogo?.node?.sourceUrl),
+      bottomGallery: [
+        homepage.bottom_gallery_photo_i?.node?.sourceUrl,
+        homepage.bottom_gallery_photo_ii?.node?.sourceUrl,
+        homepage.bottom_gallery_photo_iii?.node?.sourceUrl,
+        homepage.bottom_gallery_photo_iiii?.node?.sourceUrl,
+      ].map(toHttp).filter(Boolean)
     };
   } catch (error) {
     console.error("❌ Błąd pobierania danych z WordPressa:", error);
