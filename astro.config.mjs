@@ -6,7 +6,6 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
-  base: "./",  
-  site: "https://filmitnow.pl",
+  base: "",  
   integrations: [preact(), react()],
 });
