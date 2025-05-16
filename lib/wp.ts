@@ -1,11 +1,10 @@
 import { request, gql } from 'graphql-request';
 
-const endpoint = 'http://admin.filmitnow.pl/graphql';
-const toHttp = (url: string) => url?.replace('https://admin.filmitnow.pl', 'http://admin.filmitnow.pl');
+const endpoint = 'https://filmitnow.pl/index.php?graphql';
 
 export async function getHomepage() {
   const query = gql`
-     query {
+    query {
       page(id: "6", idType: DATABASE_ID) {
         acf {
           heroVideoUrl
@@ -24,38 +23,38 @@ export async function getHomepage() {
           instaLink
           whastsappLink
           instaLogo {
-  node {
-    sourceUrl
-  }
-}
-whatsappLogo {
-  node {
-    sourceUrl
-  }
-}
-bottom_gallery_photo_i {
-  node {
-    sourceUrl
-  }
-}
-bottom_gallery_photo_ii {
-  node {
-    sourceUrl
-  }
-}
-bottom_gallery_photo_iii {
-  node {
-    sourceUrl
-  }
-}
-bottom_gallery_photo_iiii {
-  node {
-    sourceUrl
-  }
-}
+            node {
+              sourceUrl
+            }
+          }
+          whatsappLogo {
+            node {
+              sourceUrl
+            }
+          }
+          bottom_gallery_photo_i {
+            node {
+              sourceUrl
+            }
+          }
+          bottom_gallery_photo_ii {
+            node {
+              sourceUrl
+            }
+          }
+          bottom_gallery_photo_iii {
+            node {
+              sourceUrl
+            }
+          }
+          bottom_gallery_photo_iiii {
+            node {
+              sourceUrl
+            }
+          }
         }
       }
-}
+    }
   `;
 
   try {
@@ -69,35 +68,26 @@ bottom_gallery_photo_iiii {
 
     const portfolioVideos = (homepage.portfolioVideos ?? "")
       .split("\n")
-      .map((url) => toHttp(url.trim()))
+      .map((url) => url.trim())
       .filter(Boolean);
 
     const reelsVideos = (homepage.reelsVideos ?? "")
       .split("\n")
-      .map((url) => toHttp(url.trim()))
+      .map((url) => url.trim())
       .filter(Boolean);
 
     const aboutImagesLeft = (homepage.aboutImagesLeft ?? "")
       .split("\n")
-      .map((url) => toHttp(url.trim()))
+      .map((url) => url.trim())
       .filter(Boolean);
 
     const aboutImagesRight = (homepage.aboutImagesRight ?? "")
       .split("\n")
-      .map((url) => toHttp(url.trim()))
-      .filter(Boolean);
-
-    const bottomGallery = [
-      homepage.bottom_gallery_photo_i?.sourceUrl,
-      homepage.bottom_gallery_photo_ii?.sourceUrl,
-      homepage.bottom_gallery_photo_iiI?.sourceUrl,
-      homepage.bottom_gallery_photo_iiii?.sourceUrl,
-    ]
-      .map(toHttp)
+      .map((url) => url.trim())
       .filter(Boolean);
 
     return {
-      heroVideoUrl: toHttp(homepage.heroVideoUrl),
+      heroVideoUrl: homepage.heroVideoUrl,
       portfolioVideos,
       reelsVideos,
       aboutHeadline: homepage.aboutHeadline,
@@ -112,14 +102,14 @@ bottom_gallery_photo_iiii {
       followText: homepage.socialText,
       instaLink: homepage.instaLink,
       whatsappLink: homepage.whastsappLink,
-      instaLogo: toHttp(homepage.instaLogo?.node?.sourceUrl),
-      whatsappLogo: toHttp(homepage.whatsappLogo?.node?.sourceUrl),
+      instaLogo: homepage.instaLogo?.node?.sourceUrl,
+      whatsappLogo: homepage.whatsappLogo?.node?.sourceUrl,
       bottomGallery: [
         homepage.bottom_gallery_photo_i?.node?.sourceUrl,
         homepage.bottom_gallery_photo_ii?.node?.sourceUrl,
         homepage.bottom_gallery_photo_iii?.node?.sourceUrl,
         homepage.bottom_gallery_photo_iiii?.node?.sourceUrl,
-      ].map(toHttp).filter(Boolean)
+      ].filter(Boolean),
     };
   } catch (error) {
     console.error("❌ Błąd pobierania danych z WordPressa:", error);
