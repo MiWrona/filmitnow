@@ -72,11 +72,22 @@ let selectedReel = null;
 
 <div class="reels-grid">
   {
-    reels.map((reel, index) => (
-      <div class="reel-wrapper" data-src={reel}>
-        <video src={reel} muted  loop playsinline preload="metadata" />
-      </div>
-    ))
+    reels.map((reelItem, index) => {
+      const src = typeof reelItem === 'string' ? reelItem : reelItem.src;
+      const poster = typeof reelItem === 'object' && reelItem.poster ? reelItem.poster : undefined;
+      return (
+        <div class="reel-wrapper" data-src={src} key={index}>
+          <video
+            src={src}
+            poster={poster}
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          />
+        </div>
+      );
+    })
   }
 </div>
 

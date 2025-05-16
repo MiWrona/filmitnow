@@ -9,7 +9,9 @@ export async function getHomepage() {
         acf {
           heroVideoUrl
           portfolioVideos
+          portfolioVideosPosters
           reelsVideos
+          reelsVideosPosters
           aboutHeadline
           aboutSubheadline
           aboutText
@@ -66,15 +68,33 @@ export async function getHomepage() {
       return null;
     }
 
-    const portfolioVideos = (homepage.portfolioVideos ?? "")
+    const rawVideos = (homepage.portfolioVideos ?? "")
       .split("\n")
       .map((url) => url.trim())
       .filter(Boolean);
 
-    const reelsVideos = (homepage.reelsVideos ?? "")
+    const rawPosters = (homepage.portfolioVideosPosters ?? "")
+      .split("\n")
+      .map((url) => url.trim());
+
+    const portfolioVideos = rawVideos.map((src, i) => ({
+      src,
+      poster: rawPosters[i] ?? null
+    }));
+
+    const rawReels = (homepage.reelsVideos ?? "")
       .split("\n")
       .map((url) => url.trim())
       .filter(Boolean);
+
+    const rawReelsPosters = (homepage.reelsVideosPosters ?? "")
+      .split("\n")
+      .map((url) => url.trim());
+
+    const reelsVideos = rawReels.map((src, i) => ({
+      src,
+      poster: rawReelsPosters[i] ?? null
+    }));
 
     const aboutImagesLeft = (homepage.aboutImagesLeft ?? "")
       .split("\n")

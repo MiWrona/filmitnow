@@ -2,7 +2,10 @@
 import video from "../assets/video/hero.mp4";
 
 // Przyjmujemy propsy
-const { videos = [video, video, video, video, video, video] } = Astro.props;
+const { videos = [
+  { src: video, poster }
+
+]} = Astro.props;
 
 // Przygotowujemy obiekt breakpoints
 const swiperBreakpoints = {
@@ -25,11 +28,22 @@ const swiperBreakpoints = {
           {
             videos
               .slice(slideIndex * 6, slideIndex * 6 + 6)
-              .map((videoSrc, index) => (
-                <div class="video-wrapper" data-src={videoSrc} key={index}>
-                  <video src={videoSrc} muted  loop playsinline preload="metadata" />
-                </div>
-              ))
+              .map((videoItem, index) => {
+  const src = typeof videoItem === 'string' ? videoItem : videoItem.src;
+  const poster = typeof videoItem === 'object' && videoItem.poster ? videoItem.poster : undefined;
+  return (
+    <div class="video-wrapper" data-src={src} key={index}>
+      <video
+        src={src}
+        poster={poster}
+        muted
+        loop
+        playsinline
+        preload="metadata"
+      />
+    </div>
+  );
+})
           }
         </div>
       </swiper-slide>
